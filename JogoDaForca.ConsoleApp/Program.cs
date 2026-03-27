@@ -9,14 +9,39 @@ acaba.
 
 */
 
-string palavraAleatoria = "MELANCIA";
+string palavraAleatoria = "MELANCIA"; //string pode ser usada como array
+
+char[] letrasCorretas = new char[8];
+
+for (int contadorLetras = 0; contadorLetras < 8; contadorLetras++)
+{
+    letrasCorretas[contadorLetras] = '_';
+}
 
 bool jogadorAcertou = false;
 
 while (jogadorAcertou == false)
 {
-    Console.WriteLine("Digite uma letra: ");
-    char letra = Convert.ToChar(Console.ReadLine()); //armazena apenas um caracter
+    //Console.Clear();
 
+    for (int contadorLetras = 0; contadorLetras < 8; contadorLetras++)
+    {
+        Console.Write(letrasCorretas[contadorLetras]);
+    }
+    Console.Write("\nDigite uma letra: "); //\n é mesma coisa se tivesse o LINE
+    char chute = Convert.ToChar(Console.ReadLine()); //armazena apenas um caracter
+
+    for (int contadorPalavraSecreta = 0; contadorPalavraSecreta < palavraAleatoria.Length; contadorPalavraSecreta++)
+    {
+        char letraSecretaAtual = palavraAleatoria[contadorPalavraSecreta];
+        if (chute == letraSecretaAtual)
+        {
+            letrasCorretas[contadorPalavraSecreta] = chute;
+        }
+    }
+
+    //tentar fazer o término do jogo, se palavra aleatoria == letrasCorretas então jogadorAcertou = true
+
+    Console.ReadLine();
 
 }

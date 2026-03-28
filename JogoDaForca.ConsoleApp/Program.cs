@@ -9,11 +9,11 @@ acaba.
 
 */
 
-string palavraAleatoria = "MELANCIA"; //string pode ser usada como array
+string palavraAleatoria = "BANANA"; //string pode ser usada como array
 
-char[] letrasCorretas = new char[8];
+char[] letrasCorretas = new char[6];
 
-for (int contadorLetras = 0; contadorLetras < 8; contadorLetras++)
+for (int contadorLetras = 0; contadorLetras < 6; contadorLetras++)
 {
     letrasCorretas[contadorLetras] = '_';
 }
@@ -25,10 +25,11 @@ while (jogadorAcertou == false && tentativas < 5)
 {
     //Console.Clear();
 
-    for (int contadorLetras = 0; contadorLetras < 8; contadorLetras++)
+    for (int contadorLetras = 0; contadorLetras < 6; contadorLetras++)
     {
         Console.Write(letrasCorretas[contadorLetras]);
     }
+
     Console.Write("\nDigite uma letra: "); //\n é mesma coisa se tivesse o LINE
     char chute = Convert.ToChar(Console.ReadLine()); //armazena apenas um caracter
     tentativas++;
@@ -42,7 +43,13 @@ while (jogadorAcertou == false && tentativas < 5)
         }
     }
 
-    //tentar fazer o término do jogo, se palavra aleatoria == letrasCorretas então jogadorAcertou = true
+    string palavrasAcertadas = new string(letrasCorretas);
+
+    if (palavrasAcertadas == palavraAleatoria)
+    {
+        Console.WriteLine("Parabéns...Você acertou!");
+        jogadorAcertou = true;
+    }
 
     Console.ReadLine();
 

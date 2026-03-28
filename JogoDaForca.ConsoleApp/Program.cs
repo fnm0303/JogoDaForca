@@ -19,8 +19,9 @@ for (int contadorLetras = 0; contadorLetras < 8; contadorLetras++)
 }
 
 bool jogadorAcertou = false;
+int tentativas = 0;
 
-while (jogadorAcertou == false)
+while (jogadorAcertou == false && tentativas < 5)
 {
     //Console.Clear();
 
@@ -30,6 +31,7 @@ while (jogadorAcertou == false)
     }
     Console.Write("\nDigite uma letra: "); //\n é mesma coisa se tivesse o LINE
     char chute = Convert.ToChar(Console.ReadLine()); //armazena apenas um caracter
+    tentativas++;
 
     for (int contadorPalavraSecreta = 0; contadorPalavraSecreta < palavraAleatoria.Length; contadorPalavraSecreta++)
     {

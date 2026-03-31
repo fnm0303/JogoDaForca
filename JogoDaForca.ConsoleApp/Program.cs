@@ -9,30 +9,160 @@ acaba.
 
 */
 
-string palavraAleatoria = "BANANA"; //string pode ser usada como array
+using System.Security.Cryptography;
 
-char[] letrasCorretas = new char[6];
+string[] palavras = {
+                "ABACATE",
+                "ABACAXI",
+                "ACEROLA",
+                "ACAI",
+                "ARACA",
+                "BACABA",
+                "BACURI",
+                "BANANA",
+                "CAJA",
+                "CAJU",
+                "CARAMBOLA",
+                "CUPUACU",
+                "GRAVIOLA",
+                "GOIABA",
+                "JABUTICABA",
+                "JENIPAPO",
+                "MACA",
+                "MANGABA",
+                "MANGA",
+                "MARACUJA",
+                "MURICI",
+                "PEQUI",
+                "PITANGA",
+                "PITAYA",
+                "SAPOTI",
+                "TANGERINA",
+                "UMBU",
+                "UVA",
+                "UVAIA"
+            };
 
-for (int contadorLetras = 0; contadorLetras < 6; contadorLetras++)
+int indiceAleatorio = RandomNumberGenerator.GetInt32(palavras.Length); //não precisa o +1 pq array começa contando do ZERO
+string palavraAleatoria = palavras[indiceAleatorio]; //string pode ser usada como array
+
+char[] letrasCorretas = new char[palavraAleatoria.Length];
+
+for (int contadorLetras = 0; contadorLetras < palavraAleatoria.Length; contadorLetras++)
 {
     letrasCorretas[contadorLetras] = '_';
 }
 
 bool jogadorAcertou = false;
-int tentativas = 0;
+bool jogadorPerdeu = false;
+int contadorErros = 0;
 
-while (jogadorAcertou == false && tentativas < 5)
+while (true)
 {
-    //Console.Clear();
+    Console.Clear();
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Jogo da Forca");
+    Console.WriteLine("-----------------------");
+    Console.WriteLine("Erros cometidos: " + contadorErros + " erros");
+    Console.Write("Chutes: ");
 
-    for (int contadorLetras = 0; contadorLetras < 6; contadorLetras++)
+    for (int contadorLetras = 0; contadorLetras < palavraAleatoria.Length; contadorLetras++)
     {
         Console.Write(letrasCorretas[contadorLetras]);
     }
 
-    Console.Write("\nDigite uma letra: "); //\n é mesma coisa se tivesse o LINE
+    Console.WriteLine("\n------------------------");
+    if (contadorErros == 0)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contadorErros == 1)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |                  "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contadorErros == 2)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |         |        "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contadorErros == 3)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|        "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contadorErros == 4)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|\       "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contadorErros == 5)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|\       "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |        /         ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    else if (contadorErros == 6)
+    {
+        Console.WriteLine(@" ___________        ");
+        Console.WriteLine(@" |/        |        ");
+        Console.WriteLine(@" |         o        ");
+        Console.WriteLine(@" |        /|\       "); //@ para poder usar a contra barra \
+        Console.WriteLine(@" |        / \        ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@" |                  ");
+        Console.WriteLine(@"_|____              ");
+    }
+    if (jogadorAcertou)
+    {
+        Console.WriteLine("Parabéns...Você acertou!");
+        break;
+    }
+    else if (jogadorPerdeu)
+    {
+        Console.WriteLine($"Que pena, você perdeu...A palavra era {palavraAleatoria}");
+    }
+
+    Console.Write("\nDigite uma letra: "); //\n é a mesma coisa se tivesse o LINE
     char chute = Convert.ToChar(Console.ReadLine().ToUpper()); //armazena apenas um caracter
-    tentativas++;
+
+    bool letraFoiEncontrada = false;
 
     for (int contadorPalavraSecreta = 0; contadorPalavraSecreta < palavraAleatoria.Length; contadorPalavraSecreta++)
     {
@@ -40,10 +170,19 @@ while (jogadorAcertou == false && tentativas < 5)
         if (chute == letraSecretaAtual)
         {
             letrasCorretas[contadorPalavraSecreta] = chute;
+            letraFoiEncontrada = true;
         }
     }
 
-    string palavrasAcertadas = new string(letrasCorretas);
+    if (!letraFoiEncontrada)
+        contadorErros++;
+
+    if (contadorErros > 5)
+        jogadorPerdeu = true;
+
+
+    // string palavrasAcertadas = new string(letrasCorretas); podia ser assim
+    string palavrasAcertadas = string.Join("", letrasCorretas); //criando um array nenhum espaço entre os itens
 
     if (palavrasAcertadas == palavraAleatoria)
     {
@@ -51,6 +190,6 @@ while (jogadorAcertou == false && tentativas < 5)
         jogadorAcertou = true;
     }
 
-    Console.ReadLine();
-
 }
+Console.Write("Digite Enter para sair...");
+Console.ReadLine();

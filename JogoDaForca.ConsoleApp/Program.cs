@@ -157,6 +157,7 @@ while (true)
     else if (jogadorPerdeu)
     {
         Console.WriteLine($"Que pena, você perdeu...A palavra era {palavraAleatoria}");
+        break;
     }
 
     Console.Write("\nDigite uma letra: "); //\n é a mesma coisa se tivesse o LINE
@@ -179,7 +180,6 @@ while (true)
 
     if (contadorErros > 5)
         jogadorPerdeu = true;
-
 
     // string palavrasAcertadas = new string(letrasCorretas); podia ser assim
     string palavrasAcertadas = string.Join("", letrasCorretas); //criando um array nenhum espaço entre os itens
